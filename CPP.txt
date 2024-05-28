@@ -1,0 +1,1372 @@
+//Ai Tic-tac-toe
+
+
+// #include <iostream>
+// #include <vector>
+// #include <limits>
+
+// using namespace std;
+
+// void printBoard(vector<vector<char>>& board);
+// void playerMove(vector<vector<char>>& board);
+// void aiMove(vector<vector<char>>& board);
+// bool checkWinner(vector<vector<char>>& board, char player);
+// bool isBoardFull(vector<vector<char>>& board);
+// vector<int> minimax(vector<vector<char>>& board, char player);
+// int minimaxHelper(vector<vector<char>>& board, int depth, bool isMaximizing);
+
+// int main() {
+//     vector<vector<char>> board(3, vector<char>(3, ' '));
+
+//     printBoard(board);
+
+//     char currentPlayer = 'X';
+
+//     while (true) {
+//         if (currentPlayer == 'X') {
+//             playerMove(board);
+//         } else {
+//             aiMove(board);
+//         }
+
+//         printBoard(board);
+
+//         if (checkWinner(board, currentPlayer)) {
+//             cout << currentPlayer << " wins!" << endl;
+//             break;
+//         }
+
+//         if (isBoardFull(board)) {
+//             cout << "It's a tie!" << endl;
+//             break;
+//         }
+
+//         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+//     }
+
+//     return 0;
+// }
+
+// void printBoard(vector<vector<char>>& board) {
+//     cout << "-------------" << endl;
+//     for (const auto& row : board) {
+//         cout << "| ";
+//         for (const auto& cell : row) {
+//             cout << cell << " | ";
+//         }
+//         cout << endl << "-------------" << endl;
+//     }
+// }
+
+// void playerMove(vector<vector<char>>& board) {
+//     int row, col;
+//     while (true) {
+//         cout << "Enter the row (0, 1, or 2): ";
+//         cin >> row;
+//         cout << "Enter the column (0, 1, or 2): ";
+//         cin >> col;
+
+//         if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
+//             board[row][col] = 'X';
+//             break;
+//         } else {
+//             cout << "Invalid move. Try again." << endl;
+//         }
+//     }
+// }
+
+// void aiMove(vector<vector<char>>& board) {
+//     vector<int> bestMove = minimax(board, 'O');
+//     board[bestMove[0]][bestMove[1]] = 'O';
+//     cout << "AI's move: " << endl;
+// }
+
+// vector<int> minimax(vector<vector<char>>& board, char player) {
+//     vector<int> bestMove = { -1, -1 };
+//     int bestScore = (player == 'O') ? -999 : 999;
+
+//     for (int i = 0; i < 3; ++i) {
+//         for (int j = 0; j < 3; ++j) {
+//             if (board[i][j] == ' ') {
+//                 board[i][j] = player;
+//                 int score = minimaxHelper(board, 0, false);
+//                 board[i][j] = ' ';
+
+//                 if ((player == 'O' && score > bestScore) || (player == 'X' && score < bestScore)) {
+//                     bestScore = score;
+//                     bestMove = { i, j };
+//                 }
+//             }
+//         }
+//     }
+
+//     return bestMove;
+// }
+
+// int minimaxHelper(vector<vector<char>>& board, int depth, bool isMaximizing) {
+//     if (checkWinner(board, 'O')) {
+//         return 1;
+//     }
+//     if (checkWinner(board, 'X')) {
+//         return -1;
+//     }
+//     if (isBoardFull(board)) {
+//         return 0;
+//     }
+
+//     if (isMaximizing) {
+//         int bestScore = -999;
+//         for (int i = 0; i < 3; ++i) {
+//             for (int j = 0; j < 3; ++j) {
+//                 if (board[i][j] == ' ') {
+//                     board[i][j] = 'O';
+//                     int score = minimaxHelper(board, depth + 1, false);
+//                     board[i][j] = ' ';
+//                     bestScore = max(score, bestScore);
+//                 }
+//             }
+//         }
+//         return bestScore;
+//     } else {
+//         int bestScore = 999;
+//         for (int i = 0; i < 3; ++i) {
+//             for (int j = 0; j < 3; ++j) {
+//                 if (board[i][j] == ' ') {
+//                     board[i][j] = 'X';
+//                     int score = minimaxHelper(board, depth + 1, true);
+//                     board[i][j] = ' ';
+//                     bestScore = min(score, bestScore);
+//                 }
+//             }
+//         }
+//         return bestScore;
+//     }
+// }
+
+// bool checkWinner(vector<vector<char>>& board, char player) {
+//     for (int i = 0; i < 3; ++i) {
+//         if (board[i][0] == player && board[i][1] == player && board[i][2] == player) {
+//             return true;
+//         }
+//         if (board[0][i] == player && board[1][i] == player && board[2][i] == player) {
+//             return true;
+//         }
+//     }
+
+//     if (board[0][0] == player && board[1][1] == player && board[2][2] == player) {
+//         return true;
+//     }
+//     if (board[0][2] == player && board[1][1] == player && board[2][0] == player) {
+//         return true;
+//     }
+
+//     return false;
+// }
+
+// bool isBoardFull(vector<vector<char>>& board) {
+//     for (const auto& row : board) {
+//         for (const auto& cell : row) {
+//             if (cell == ' ') {
+//                 return false;
+//             }
+//         }
+//     }
+//     return true;
+// }
+
+
+
+
+//Non Ai Tic-tac-toe
+#include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// vector<vector<char>> board(3, vector<char>(3, ' '));
+
+// void printBoard() {
+//     cout << "-------------" << endl;
+//     for (const auto& row : board) {
+//         cout << "| ";
+//         for (const auto& cell : row) {
+//             cout << cell << " | ";
+//         }
+//         cout << endl << "-------------" << endl;
+//     }
+// }
+
+// bool checkWinner(char player) {
+//     for (int i = 0; i < 3; ++i) {
+//         if (board[i][0] == player && board[i][1] == player && board[i][2] == player) return true;
+//         if (board[0][i] == player && board[1][i] == player && board[2][i] == player) return true;
+//     }
+//     if (board[0][0] == player && board[1][1] == player && board[2][2] == player) return true;
+//     if (board[0][2] == player && board[1][1] == player && board[2][0] == player) return true;
+//     return false;
+// }
+
+// bool isBoardFull() {
+//     for (const auto& row : board) {
+//         for (const auto& cell : row) {
+//             if (cell == ' ') return false;
+//         }
+//     }
+//     return true;
+// }
+
+// void playerMove(char player) {
+//     int row, col;
+//     while (true) {
+//         cout << "Player " << player << ", enter the row (0, 1, or 2): ";
+//         cin >> row;
+//         cout << "Player " << player << ", enter the column (0, 1, or 2): ";
+//         cin >> col;
+
+//         if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
+//             board[row][col] = player;
+//             break;
+//         } else {
+//             cout << "Invalid move. Try again." << endl;
+//         }
+//     }
+// }
+
+// int main() {
+//     printBoard();
+//     char currentPlayer = 'X';
+
+//     while (true) {
+//         playerMove(currentPlayer);
+//         printBoard();
+
+//         if (checkWinner(currentPlayer)) {
+//             cout << "Player " << currentPlayer << " wins!" << endl;
+//             break;
+//         }
+
+//         if (isBoardFull()) {
+//             cout << "It's a tie!" << endl;
+//             break;
+//         }
+
+//         currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+//     }
+
+//     return 0;
+// }
+
+
+//BFS MAZE
+#include <iostream>
+// #include <queue>
+// #include <vector>
+// #include <climits>
+
+// using namespace std;
+
+// struct Coord {
+//     int row, col;
+
+//     Coord(int r, int c) : row(r), col(c) {}
+// };
+
+// bool isValid(int row, int col, int rows, int cols) {
+//     return row >= 0 && row < rows && col >= 0 && col < cols;
+// }
+
+// void printMaze(const vector<vector<char>>& maze) {
+//     for (const auto& row : maze) {
+//         for (char cell : row) {
+//             cout << cell << ' ';
+//         }
+//         cout << endl;
+//     }
+// }
+
+// int bfs(vector<vector<char>>& maze, Coord start, Coord destination) {
+//     const int rows = maze.size();
+//     const int cols = maze[0].size();
+
+//     // Initialize distance array with large values
+//     vector<vector<int>> distance(rows, vector<int>(cols));
+
+//     // Mark the start point as visited and set its distance to 0
+//     maze[start.row][start.col] = 'V';
+//     distance[start.row][start.col] = 0;
+
+//     queue<Coord> q;
+//     q.push(start);
+
+//     while (!q.empty()) {
+//         Coord current = q.front();
+//         q.pop();
+
+//         if (current.row == destination.row && current.col == destination.col) {
+//             // Destination reached
+//             return distance[current.row][current.col];
+//         }
+
+//         // Explore neighbors
+//         const int dr[] = {-1, 1, 0, 0};  // Up, Down, Left, Right
+//         const int dc[] = {0, 0, -1, 1};
+
+//         for (int i = 0; i < 4; ++i) {
+//             int newRow = current.row + dr[i];
+//             int newCol = current.col + dc[i];
+
+//             if (isValid(newRow, newCol, rows, cols) && (maze[newRow][newCol] == '.' || maze[newRow][newCol] == 'F')) {
+//                 // Mark the cell as visited
+//                 maze[newRow][newCol] = 'V';
+
+//                 // Update the distance and enqueue the neighbor for further exploration
+//                 distance[newRow][newCol] = distance[current.row][current.col] + 1;
+//                 q.push(Coord(newRow, newCol));
+//             }
+//         }
+//     }
+ 
+//     // Destination not reachable
+//     return -1;
+// }
+
+// int main() {
+//     // Example maze
+    
+//     vector<vector<char>> maze = {
+//         {'S', '.', '.', '#', '.', '.', '#', '#'},
+//         {'.', '#', '.', '.', '.', '#', '.', '.'},
+//         {'#', '#', '#', '#', '.', '#', '#', '#'},
+//         {'.', '#', '.', '.', '.', '.', '#', 'F'},
+//     };
+
+//     Coord start(0, 0);
+//     Coord destination(3, 7);
+
+//     cout << "Original Maze:\n";
+//     printMaze(maze);
+
+//     int shortestPathLength = bfs(maze, start, destination);
+
+//     if (shortestPathLength != -1) {
+//         cout << "\nShortest Path Length: " << shortestPathLength << endl;
+//         printMaze(maze);
+//     } else {
+//         cout << "\nNo Path Found.\n";
+//     }
+
+//     return 0;
+// }
+
+
+//DFS RECURSIVE
+#include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// struct Coord {
+//     int row, col;
+
+//     Coord(int r, int c) : row(r), col(c) {}
+// };
+
+// bool isValid(const vector<vector<char>>& maze, int row, int col) {
+//     return row >= 0 && row < maze.size() && col >= 0 && col < maze[0].size();
+// }
+
+// bool dfs(vector<vector<char>>& maze, Coord current, const Coord& exit, int& shortestPathLength, int currentPathLength) {
+//     maze[current.row][current.col] = 'V';
+
+//     if (current.row == exit.row && current.col == exit.col) {
+//         shortestPathLength = currentPathLength;
+//         return true;
+//     }
+
+//     const int dr[] = {-1, 0, 1, 0};
+//     const int dc[] = {0, 1, 0, -1};
+//     for (int i = 0; i < 4; ++i) {
+//         int newRow = current.row + dr[i];
+//         int newCol = current.col + dc[i];
+
+//         if (isValid(maze, newRow, newCol) && (maze[newRow][newCol] == '.' || maze[newRow][newCol] == 'F')) {
+//             Coord next(newRow, newCol);
+//             if (dfs(maze, next, exit, shortestPathLength, currentPathLength + 1)) {
+//                 return true;
+//             }
+//         }
+//     }
+
+//     return false;
+// }
+
+// int main() {
+//     vector<vector<char>> maze = {
+//         {'S', '.', '.', '#', '.', '.', '#', '#'},
+//         {'.', '#', '.', '.', '.', '#', '.', '.'},
+//         {'#', '#', '#', '#', '.', '#', '#', '#'},
+//         {'.', '#', '.', '.', '.', '.', '.', 'F'},
+//     };
+
+//     Coord start(0, 0);
+//     Coord destination(3, 7);
+
+//     int shortestPathLength = 0;
+
+//     cout << "Original Maze:\n";
+//     for (const auto& row : maze) {
+//         for (char cell : row) {
+//             cout << cell << ' ';
+//         }
+//         cout << endl;
+//     }
+
+//     if (dfs(maze, start, destination, shortestPathLength, 0)) {
+//         cout << "\nShortest Path Length: " << shortestPathLength << endl;
+//         for (const auto& row : maze) {
+//             for (char cell : row) {
+//                 cout << cell << ' ';
+//             }
+//             cout << endl;
+//         }
+//     } else {
+//         cout << "\nNo Path Found.\n";
+//     }
+
+//     return 0;
+// }
+
+//DFS STACK
+#include <iostream>
+// #include <vector>
+// #include <stack>
+
+// using namespace std;
+
+// struct Coord {
+//     int row, col;
+
+//     Coord(int r, int c) : row(r), col(c) {}
+// };
+
+// bool isValid(const vector<vector<char>>& maze, int row, int col) {
+//     return row >= 0 && row < maze.size() && col >= 0 && col < maze[0].size();
+// }
+
+// bool dfs(vector<vector<char>>& maze, Coord start, const Coord& exit, int& shortestPathLength) {
+//     stack<pair<Coord, int>> s;
+//     s.push({start, 0});
+
+//     const int dr[] = {-1, 0, 1, 0};
+//     const int dc[] = {0, 1, 0, -1};
+
+//     while (!s.empty()) {
+//         auto [current, currentPathLength] = s.top();
+//         s.pop();
+
+//         if (maze[current.row][current.col] == 'V') {
+//             continue;
+//         }
+
+//         maze[current.row][current.col] = 'V';
+
+//         if (current.row == exit.row && current.col == exit.col) {
+//             shortestPathLength = currentPathLength;
+//             return true;
+//         }
+
+//         for (int i = 0; i < 4; ++i) {
+//             int newRow = current.row + dr[i];
+//             int newCol = current.col + dc[i];
+
+//             if (isValid(maze, newRow, newCol) && (maze[newRow][newCol] == '.' || maze[newRow][newCol] == 'F')) {
+//                 s.push({Coord(newRow, newCol), currentPathLength + 1});
+//             }
+//         }
+//     }
+
+//     return false;
+// }
+
+// int main() {
+//     vector<vector<char>> maze = {
+//         {'S', '.', '.', '#', '.', '.', '#', '#'},
+//         {'.', '#', '.', '.', '.', '#', '.', '.'},
+//         {'#', '#', '#', '#', '.', '#', '#', '#'},
+//         {'.', '#', '.', '.', '.', '.', '.', 'F'},
+//     };
+
+//     Coord start(0, 0);
+//     Coord destination(3, 7);
+
+//     int shortestPathLength = 0;
+
+//     cout << "Original Maze:\n";
+//     for (const auto& row : maze) {
+//         for (char cell : row) {
+//             cout << cell << ' ';
+//         }
+//         cout << endl;
+//     }
+
+//     if (dfs(maze, start, destination, shortestPathLength)) {
+//         cout << "\nShortest Path Length: " << shortestPathLength << endl;
+//         for (const auto& row : maze) {
+//             for (char cell : row) {
+//                 cout << cell << ' ';
+//             }
+//             cout << endl;
+//         }
+//     } else {
+//         cout << "\nNo Path Found.\n";
+//     }
+
+//     return 0;
+// }
+
+
+//DFS Depth Limit
+
+
+#include <iostream>
+// #include <vector>
+
+// using namespace std;
+
+// // Structure to represent coordinates in the maze
+// struct Coord {
+//     int row, col;
+
+//     Coord(int r, int c) : row(r), col(c) {}
+// };
+
+// // Function to check if a coordinate is valid in the maze
+// bool isValid(const vector<vector<char>>& maze, int row, int col) {
+//     return row >= 0 && row < maze.size() && col >= 0 && col < maze[0].size();
+// }
+
+// // Recursive Depth-Limited DFS to find the shortest path in the maze
+// bool dfs(vector<vector<char>>& maze, Coord current, const Coord& goal, int depthLimit, int& shortestPathLength, int currentPathLength) {
+//     // If current path length exceeds the depth limit, backtrack
+//     if (currentPathLength > depthLimit) {
+//         return false;
+//     }
+
+//     // If the current position is the goal, update the shortest path length and return true
+//     if (current.row == goal.row && current.col == goal.col) {
+        
+//             shortestPathLength = currentPathLength;
+        
+//         return true;
+//     }
+
+//     // Mark the current cell as visited
+//     char originalValue = maze[current.row][current.col];
+//     maze[current.row][current.col] = 'V';
+
+//     // Explore neighbors in four directions: up, right, down, left
+//     const int dr[] = {-1, 0, 1, 0};  // Up, Right, Down, Left
+//     const int dc[] = {0, 1, 0, -1};
+//     bool found = false;
+//     for (int i = 0; i < 4; ++i) {
+//         int newRow = current.row + dr[i];
+//         int newCol = current.col + dc[i];
+
+//         if (isValid(maze, newRow, newCol) && (maze[newRow][newCol] == '.' || maze[newRow][newCol] == 'F')) {
+//             Coord next(newRow, newCol);
+//             if (dfs(maze, next, goal, depthLimit, shortestPathLength, currentPathLength + 1)) {
+//                 found = true;
+//             }
+//         }
+//     }
+
+//     // Backtrack: Unmark the current cell
+//     maze[current.row][current.col] = originalValue;
+
+//     return found;
+// }
+
+// int main() {
+//     // Example maze
+//     vector<vector<char>> maze = {
+//         {'S', '.', '.', '#', '.', '.', '#', '#'},
+//         {'.', '#', '.', '.', 'F', '#', '.', '.'},
+//         {'#', '#', '#', '#', '.', '#', '#', '#'},
+//         {'.', '#', '.', '.', '.', '.', '.', '#'},
+//     };
+
+//     Coord start(0, 0);
+//     Coord destination(1, 4);
+
+//     int depthLimit = 5; // Depth limit for DFS
+//     int shortestPathLength = 0; // Initialize shortest path length to a large value
+
+//     cout << "Original Maze:\n";
+//     for (const auto& row : maze) {
+//         for (char cell : row) {
+//             cout << cell << ' ';
+//         }
+//         cout << endl;
+//     }
+
+//     if (dfs(maze, start, destination, depthLimit, shortestPathLength, 0)) {
+//         cout << "\nShortest Path Length: " << shortestPathLength << endl;
+//     } else {
+//         cout << "\nNo Path Found within depth limit.\n";
+//     }
+
+//     return 0;
+// }
+
+
+
+//DFS ITERATive DEPTH LIMIT
+#include <iostream>
+// #include <vector>
+// #include <climits>
+
+// using namespace std;
+
+// struct Coord {
+//     int row, col;
+
+//     Coord(int r, int c) : row(r), col(c) {}
+// };
+
+// bool isValid(const vector<vector<char>>& maze, int row, int col) {
+//     return row >= 0 && row < maze.size() && col >= 0 && col < maze[0].size();
+// }
+
+// pair<int, int> dfs(vector<vector<char>>& maze, Coord current, const Coord& exit, int depthLimit, int depth) {
+//     if (depth > depthLimit) {
+//         return make_pair(INT_MAX, -1); // Depth limit exceeded
+//     }
+
+//     if (current.row == exit.row && current.col == exit.col) {
+//         return make_pair(depth, depth); // Goal found at this depth
+//     }
+
+//     maze[current.row][current.col] = 'V';
+
+//     const int dr[] = {-1, 0, 1, 0};  // Up, Right, Down, Left
+//     const int dc[] = {0, 1, 0, -1};
+//     for (int i = 0; i < 4; ++i) {
+//         int newRow = current.row + dr[i];
+//         int newCol = current.col + dc[i];
+
+//         if (isValid(maze, newRow, newCol) && (maze[newRow][newCol] == '.' || maze[newRow][newCol] == 'F')) {
+//             Coord next(newRow, newCol);
+//             pair<int, int> result = dfs(maze, next, exit, depthLimit, depth + 1);
+//             if (result.second != -1) {
+//                 return result; // Goal found
+//             }
+//         }
+//     }
+
+//     maze[current.row][current.col] = '.'; // Unmark the cell
+//     return make_pair(INT_MAX, -1); // Goal not found
+// }
+
+// pair<int, int> iddfs(vector<vector<char>>& maze, const Coord& start, const Coord& exit, int maxDepth) {
+//     for (int depthLimit = 0; depthLimit <= maxDepth; ++depthLimit) {
+//         vector<vector<char>> tempMaze = maze; // Use a copy of the maze to avoid permanent modifications
+//         pair<int, int> result = dfs(tempMaze, start, exit, depthLimit, 0);
+//         if (result.second != -1) {
+//             return result; // Goal found at this depth
+//         }
+//     }
+//     return make_pair(INT_MAX, -1); // Goal not found within maximum depth limit
+// }
+
+// int main() {
+//     vector<vector<char>> maze = {
+//         {'S', '.', '.', '#', '.', '.', '#', '#'},
+//         {'.', '#', '.', '.', '.', '#', '.', '.'},
+//         {'#', '#', '#', '#', '.', '#', '#', '#'},
+//         {'.', '#', '.', '.', '.', '.', '.', 'F'},
+//     };
+
+//     Coord start(0, 0);
+//     Coord destination(3, 7);
+//     int maxDepth = 5; // Maximum depth for IDDFS
+
+//     cout << "Original Maze:\n";
+//     for (const auto& row : maze) {
+//         for (char cell : row) {
+//             cout << cell << ' ';
+//         }
+//         cout << endl;
+//     }
+
+//     pair<int, int> result = iddfs(maze, start, destination, maxDepth);
+//     if (result.second != -1) {
+//         cout << "\nShortest Path Length: " << result.first << endl;
+//         cout << "Goal Found at Depth: " << result.second << endl;
+//     } else {
+//         cout << "\nGoal Not Found within depth limit.\n";
+//     }
+
+//     return 0;
+// }
+
+
+//N HILL CLIMBING
+
+#include <iostream>
+// #include <vector>
+// #include <cstdlib>
+// #include <ctime>
+
+// using namespace std;
+
+// struct Item {
+//     int weight;
+//     int value;
+// };
+
+// vector<bool> generateRandomSolution(int n) {
+//     vector<bool> solution(n);
+//     for (int i = 0; i < n; ++i) {
+//         solution[i] = rand() % 2;
+//     }
+//     return solution;
+// }
+
+// int evaluateSolution(const vector<Item>& items, const vector<bool>& solution, int capacity) {
+//     int totalWeight = 0;
+//     int totalValue = 0;
+//     for (int i = 0; i < items.size(); ++i) {
+//         if (solution[i]) {
+//             totalWeight += items[i].weight;
+//             totalValue += items[i].value;
+//         }
+//     }
+//     return (totalWeight <= capacity) ? totalValue : -1;
+// }
+
+// vector<bool> nHillClimbing(const vector<Item>& items, int capacity, int iterations) {
+//     int n = items.size();
+//     vector<bool> bestSolution(n);
+//     int bestValue = -1;
+
+//     for (int iter = 0; iter < iterations; ++iter) {
+//         vector<bool> currentSolution = generateRandomSolution(n);
+//         int currentValue = evaluateSolution(items, currentSolution, capacity);
+
+//         while (true) {
+//             int randIndex = rand() % n;
+//             currentSolution[randIndex] = !currentSolution[randIndex];
+//             int newValue = evaluateSolution(items, currentSolution, capacity);
+
+//             if (newValue >= currentValue) {
+//                 currentValue = newValue;
+//             } else {
+//                 currentSolution[randIndex] = !currentSolution[randIndex];
+//                 break;
+//             }
+//         }
+
+//         if (currentValue > bestValue) {
+//             bestSolution = currentSolution;
+//             bestValue = currentValue;
+//         }
+//     }
+
+//     return bestSolution;
+// }
+
+// int main() {
+//     srand(time(NULL));
+
+//     vector<Item> items = {{2, 10}, {3, 15}, {5, 7}, {7, 10}};
+//     int capacity = 10;
+//     int iterations = 500;
+//     vector<bool> solution = nHillClimbing(items, capacity, iterations);
+
+//     cout << "Selected items:\n";
+//     for (int i = 0; i < items.size(); ++i) {
+//         if (solution[i]) {
+//             cout << "Item " << i+1 << ": Weight = " << items[i].weight << ", Value = " << items[i].value << endl;
+//         }
+//     }
+
+//     cout << "Total value: " << evaluateSolution(items, solution, capacity) << endl;
+
+//     return 0;
+// }
+
+
+//CSP Sudoku
+// #include <iostream>
+// #include <vector>
+// using namespace std;
+
+// const int N = 9;
+
+// // Function to check if a number can be placed in a given cell
+// bool isValid(vector<vector<int>>& board, int row, int col, int num) {
+//     // Check if the number is already present in the row or column
+//     for (int i = 0; i < N; ++i) {
+//         if (board[row][i] == num || board[i][col] == num) {
+//             return false;
+//         }
+//     }
+
+//     // Check if the number is already present in the 3x3 grid
+//     int startRow = row - row % 3;
+//     int startCol = col - col % 3;
+//     for (int i = 0; i < 3; ++i) {
+//         for (int j = 0; j < 3; ++j) {
+//             if (board[startRow + i][startCol + j] == num) {
+//                 return false;
+//             }
+//         }
+//     }
+
+//     return true;
+// }
+
+// // Function to solve Sudoku using backtracking
+// bool solveSudoku(vector<vector<int>>& board) {
+//     for (int row = 0; row < N; ++row) {
+//         for (int col = 0; col < N; ++col) {
+//             if (board[row][col] == 0) {
+//                 // Try placing numbers from 1 to 9 in the current empty cell
+//                 for (int num = 1; num <= 9; ++num) {
+//                     if (isValid(board, row, col, num)) {
+//                         board[row][col] = num;
+
+//                         // Recursively solve the Sudoku puzzle
+//                         if (solveSudoku(board)) {
+//                             return true;
+//                         }
+
+//                         // Backtrack: Undo the current cell assignment
+//                         board[row][col] = 0;
+//                     }
+//                 }
+
+//                 // If no number can be placed in the current cell, return false
+//                 return false;
+//             }
+//         }
+//     }
+
+//     // If all cells are filled, the Sudoku puzzle is solved
+//     return true;
+// }
+
+// // Function to print the Sudoku board
+// void printBoard(vector<vector<int>>& board) {
+//     for (int i = 0; i < N; ++i) {
+//         for (int j = 0; j < N; ++j) {
+//             cout << board[i][j] << " ";
+//         }
+//         cout << endl;
+//     }
+// }
+
+// int main() {
+//     vector<vector<int>> board = {
+//         {5, 3, 0, 0, 7, 0, 0, 0, 0},
+//         {6, 0, 0, 1, 9, 5, 0, 0, 0},
+//         {0, 9, 8, 0, 0, 0, 0, 6, 0},
+//         {8, 0, 0, 0, 6, 0, 0, 0, 3},
+//         {4, 0, 0, 8, 0, 3, 0, 0, 1},
+//         {7, 0, 0, 0, 2, 0, 0, 0, 6},
+//         {0, 6, 0, 0, 0, 0, 2, 8, 0},
+//         {0, 0, 0, 4, 1, 9, 0, 0, 5},
+
+//         {0, 0, 0, 0, 8, 0, 0, 7, 9}
+//     };
+
+//     cout << "Original Sudoku Board:" << endl;
+//     printBoard(board);
+
+//     if (solveSudoku(board)) {
+//         cout << "\nSolved Sudoku Board:" << endl;
+//         printBoard(board);
+//     } else {
+//         cout << "\nNo solution exists for the given Sudoku board." << endl;
+//     }
+
+//     return 0;
+// }
+
+
+//Prolog-1
+
+% Facts representing movies and their genres
+movie(iron_man, action).
+movie(the_shawshank_redemption, drama).
+movie(inception, sci_fi).
+movie(the_dark_knight, action).
+movie(pulp_fiction, crime).
+movie(frozen, animation).
+movie(coco, animation).
+movie(black_panther, action).
+movie(finding_nemo, animation).
+movie(forrest_gump, drama).
+movie(avengers_endgame, action).
+movie(the_matrix, sci_fi).
+movie(toy_story, animation).
+movie(the_godfather, crime).
+movie(interstellar, sci_fi).
+movie(the_lion_king, animation).
+movie(schindlers_list, drama).
+movie(gladiator, action).
+
+% User preferences
+user_likes(john, action).
+user_likes(alice, animation).
+user_likes(bob, drama).
+user_likes(carol, sci_fi).
+
+% Predicate to track watched movies
+watched(john, pulp_fiction).
+watched(john, finding_nemo).
+watched(alice, frozen).
+watched(bob, the_dark_knight).
+watched(bob, forrest_gump).
+watched(carol, inception).
+
+% AI predicate for movie recommendation
+recommend_movie(User, Movie) :- 
+    user_likes(User, Genre), 
+    movie(Movie, Genre), 
+    \+ watched(User, Movie).
+
+?- recommend_movie(john, Movie).
+
+
+
+//Prolog2
+
+/* Define knowledge base */
+symptom(anna, fever).
+symptom(anna, cough).
+symptom(anna, headache).
+symptom(john, sore_throat).
+symptom(john, cough).
+symptom(john, fatigue).
+symptom(mary, fever).
+symptom(mary, nausea).
+symptom(mary, body_aches).
+symptom(peter, runny_nose).
+symptom(peter, congestion).
+symptom(peter, sneezing).
+
+/* Define rules */
+diagnosis(X, cold) :- symptom(X, cough), symptom(X, fever).
+diagnosis(X, flu) :- symptom(K, fever), symptom(X, headache).
+diagnosis(X, strep_throat) :- symptom(X, sore_throat), symptom(X, fever).
+diagnosis(X, stomach_flu) :- symptom(X, nausea), symptom(X, body_aches).
+diagnosis(X, allergies) :- symptom(X, runny_nose), symptom(X, congestion), symptom(X, sneezing).
+
+/* Query for diagnosis of Anna */
+?- diagnosis(anna, Disease).
+
+
+//Best First Search
+// #include <iostream>
+// #include <vector>
+// #include <queue>
+// #include <unordered_set>
+// #include <algorithm>
+
+// using namespace std;
+// void printPuzzle(vector<vector<int>> puzzle);
+
+// // Define the State struct to represent each state of the puzzle
+// struct State {
+//     vector<vector<int>> puzzle;
+//     int heuristic;
+//     string hash; // String representation of the state
+
+//     State(vector<vector<int>> p, int h) : puzzle(p), heuristic(h) {
+//         hash = convertToString(puzzle);
+//     }
+
+//     bool operator<(const State& other) const {
+//         return heuristic > other.heuristic; // Priority queue should order by lowest heuristic
+//     }
+
+//     static string convertToString( vector<vector<int>> state) {
+//         string str;
+//         for (auto row : state) {
+//             for (int value : row) {
+//                 str += to_string(value) + ",";
+//             }
+//         }
+//         return str; 
+//     }
+// };
+
+// // Calculate Manhattan distance heuristic
+// int manhattanDistance(vector<vector<int>>& state,vector<vector<int>>& goalState) {
+//     int distance = 0;
+//     for (int i = 0; i < 3; ++i) {
+//         for (int j = 0; j < 3; ++j) {
+//             int value = state[i][j];
+//             if (value != 0) {
+//                 for (int k = 0; k < 3; ++k) {
+//                     for (int l = 0; l < 3; ++l) {
+//                         if (value == goalState[k][l]) {
+//                             distance += abs(k - i) + abs(l - j);
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     return distance;
+// }
+
+// // Check if the state is the goal state
+// bool isGoalState(vector<vector<int>>& state,vector<vector<int>>& goalState) {
+//     return state == goalState;
+// }
+
+// // Generate all possible moves from the current state
+// vector<vector<vector<int>>> generateMoves(vector<vector<int>>& state) {
+//     vector<vector<vector<int>>> moves;
+//     int dx[] = {-1, 1, 0, 0}; // Up, Down, Left, Right
+//     int dy[] = {0, 0, -1, 1};
+//     int x, y;
+//     for (int i = 0; i < 3; ++i) {
+//         for (int j = 0; j < 3; ++j) {
+//             if (state[i][j] == 0) {
+//                 x = i;
+//                 y = j;
+//                 break;
+//             }
+//         }
+//     }
+//     for (int k = 0; k < 4; ++k) {
+//         int newX = x + dx[k];
+//         int newY = y + dy[k];
+//         if (newX >= 0 && newX < 3 && newY >= 0 && newY < 3) {
+//             vector<vector<int>> newState = state;
+//             swap(newState[x][y], newState[newX][newY]);
+//             moves.push_back(newState);
+//         }
+//     }
+//     return moves;
+// }
+
+// // Solve the puzzle using best-first search
+// vector<vector<int>> solvePuzzle(vector<vector<int>>& initialState,vector<vector<int>>& goalState, vector<State>& steps) {
+//     priority_queue<State> frontier;
+//     unordered_set<string> explored;
+
+//     int initialHeuristic = manhattanDistance(initialState, goalState);
+//     State initial(initialState, initialHeuristic);
+//     frontier.push(initial);
+
+//     while (!frontier.empty()) {
+//         State current = frontier.top();
+//         frontier.pop();
+
+//         steps.push_back(current); // Add current state to steps
+
+//         if (isGoalState(current.puzzle, goalState)) {
+//             return current.puzzle;
+//         }
+
+//         explored.insert(current.hash);
+
+//         vector<vector<vector<int>>> nextMoves = generateMoves(current.puzzle);
+//         for (auto nextState : nextMoves) {
+//             string nextStateString = State:: convertToString(nextState); // Use the member function
+//             if (explored.find(nextStateString) == explored.end()) {
+//                 int heuristic = manhattanDistance(nextState, goalState);
+//                 State nextStateNode(nextState, heuristic);
+//                 frontier.push(nextStateNode);
+//             }
+//         }
+//     }
+
+//     return {}; // No solution found
+// }
+
+
+// // Utility function to print the puzzle state
+// void printPuzzle(vector<vector<int>> puzzle) {
+//     for (auto row : puzzle) {
+//         for (int value : row) {
+//             if (value == 0) {
+//                 cout << "  "; // Print two spaces for the empty tile
+//             } else {
+//                 cout << value << " ";
+//             }
+//         }
+//         cout << endl;
+//     }
+// }
+
+// // Function to take puzzle input from the user
+// vector<vector<int>> inputPuzzle(const string& prompt) {
+//     vector<vector<int>> puzzle(3, vector<int>(3));
+//     cout << prompt << " (use 0 for empty tile):\n";
+//     for (int i = 0; i < 3; ++i) {
+//         cout << "Row " << (i + 1) << ": ";
+//         for (int j = 0; j < 3; ++j) {
+//             cin >> puzzle[i][j];
+//         }
+//     }
+//     return puzzle;
+// }
+
+
+// // Main function
+// int main() {
+//     vector<vector<int>> initialState = inputPuzzle("Enter the initial puzzle configuration");
+//     vector<vector<int>> goalState = inputPuzzle("Enter the goal puzzle configuration");
+
+//     // cout << "\nInitial state:" << endl;
+
+//     vector<State> steps; // Vector to store the steps
+
+//     vector<vector<int>> solution = solvePuzzle(initialState, goalState, steps);
+
+//     if (!solution.empty()) {
+//         cout << "\nSolution:" << endl;
+//         cout<<endl;
+//         for (long long int i = 0; i < steps.size(); ++i) {
+//             cout << "Step " << i+1 << ":" << endl;
+//             printPuzzle(steps[i].puzzle); // Access the puzzle member of State
+//             cout << endl;
+//         }
+//         cout << "Total steps: " << steps.size() << endl;
+//     } else {
+//         cout << "\nNo solution found." << endl;
+//     }
+
+//     return 0;
+// }
+
+
+//A*******
+
+//#include <iostream>
+// #include <vector>
+// #include <queue>
+// #include <unordered_set>
+// #include <algorithm>
+
+// using namespace std;
+
+// // Utility function to print the puzzle state
+// void printPuzzle(vector<vector<int>> puzzle)
+// {
+//     for (auto &row : puzzle)
+//     {
+//         for (int value : row)
+//         {
+//             if (value == 0)
+//             {
+//                 cout << "  "; // Print two spaces for the empty tile
+//             }
+//             else
+//             {
+//                 cout << value << " ";
+//             }
+//         }
+//         cout << endl;
+//     }
+// }
+
+// // Define the State struct to represent each state of the puzzle
+// struct State
+// {
+//     vector<vector<int>> puzzle;
+//     int g; // Cost to reach this state
+//     // g is the count of moves taken to reach the current state from the start state.
+//     int h; // Heuristic cost to reach the goal
+//     // heuristic is the estimate of the cost it should never overestimate the cost.
+//     int f;       // Total cost (g + h)
+//     string hash; // String representation of the state
+
+//     State(vector<vector<int>> p, int g, int h) : puzzle(p), g(g), h(h)
+//     {
+//         f = g + h;
+//         hash = convertToString(puzzle);
+//     }
+
+//     bool operator<(const State &other) const
+//     {
+//         return f > other.f; // Priority queue should order by lowest f
+//     }
+
+//     static string convertToString(vector<vector<int>> &state)
+//     {
+//         string str;
+//         for (auto &row : state)
+//         {
+//             for (int value : row)
+//             {
+//                 str += to_string(value) + ",";
+//             }
+//         }
+//         return str;
+//     }
+// };
+
+// // Calculate Manhattan distance heuristic
+// int manhattanDistance(vector<vector<int>> &state, vector<vector<int>> &goalState)
+// {
+//     int distance = 0;
+//     for (int i = 0; i < 3; ++i)
+//     {
+//         for (int j = 0; j < 3; ++j)
+//         {
+//             int value = state[i][j];
+//             if (value != 0)
+//             {
+//                 for (int k = 0; k < 3; ++k)
+//                 {
+//                     for (int l = 0; l < 3; ++l)
+//                     {
+//                         if (value == goalState[k][l])
+//                         {
+//                             distance += abs(k - i) + abs(l - j);
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     return distance;
+// }
+
+// // Check if the state is the goal state
+// bool isGoalState(vector<vector<int>> &state, vector<vector<int>> &goalState)
+// {
+//     return state == goalState;
+// }
+
+// // Generate all possible moves from the current state
+// vector<vector<vector<int>>> generateMoves(vector<vector<int>> &state)
+// {
+//     vector<vector<vector<int>>> moves;
+//     int dx[] = {-1, 1, 0, 0}; // Up, Down, Left, Right
+//     int dy[] = {0, 0, -1, 1};
+//     int x, y;
+//     for (int i = 0; i < 3; ++i)
+//     {
+//         for (int j = 0; j < 3; ++j)
+//         {
+//             if (state[i][j] == 0)
+//             {
+//                 x = i;
+//                 y = j;
+//                 break;
+//             }
+//         }
+//     }
+//     for (int k = 0; k < 4; ++k)
+//     {
+//         int newX = x + dx[k];
+//         int newY = y + dy[k];
+//         if (newX >= 0 && newX < 3 && newY >= 0 && newY < 3)
+//         {
+//             vector<vector<int>> newState = state;
+//             swap(newState[x][y], newState[newX][newY]);
+//             moves.push_back(newState);
+//         }
+//     }
+//     return moves;
+// }
+
+// // Solve the puzzle using A* search
+// vector<vector<int>> solvePuzzle(vector<vector<int>> &initialState, vector<vector<int>> &goalState, vector<State> &steps)
+// {
+//     priority_queue<State> frontier;
+//     unordered_set<string> explored;
+
+//     int initialHeuristic = manhattanDistance(initialState, goalState);
+//     State initial(initialState, 0, initialHeuristic);
+//     frontier.push(initial);
+
+//     while (!frontier.empty())
+//     {
+//         State current = frontier.top();
+//         frontier.pop();
+
+//         steps.push_back(current); // Add current state to steps
+
+//         if (isGoalState(current.puzzle, goalState))
+//         {
+//             return current.puzzle;
+//         }
+
+//         explored.insert(current.hash);
+
+//         vector<vector<vector<int>>> nextMoves = generateMoves(current.puzzle);
+//         for (auto &nextState : nextMoves)
+//         {
+//             string nextStateString = State::convertToString(nextState);
+//             if (explored.find(nextStateString) == explored.end())
+//             {
+//                 int g = current.g + 1;
+//                 int h = manhattanDistance(nextState, goalState);
+//                 State nextStateNode(nextState, g, h);
+//                 frontier.push(nextStateNode);
+//             }
+//         }
+//     }
+
+//     return {}; // No solution found
+// }
+
+// // Function to take puzzle input from the user
+// vector<vector<int>> inputPuzzle(string prompt)
+// {
+//     vector<vector<int>> puzzle(3, vector<int>(3));
+//     cout << prompt << " (use 0 for empty tile):\n";
+//     for (int i = 0; i < 3; ++i)
+//     {
+//         cout << "Row " << (i + 1) << ": ";
+//         for (int j = 0; j < 3; ++j)
+//         {
+//             cin >> puzzle[i][j];
+//         }
+//     }
+//     return puzzle;
+// }
+
+// // Main function
+// int main()
+// {
+//     vector<vector<int>> initialState = inputPuzzle("Enter the initial puzzle configuration");
+//     vector<vector<int>> goalState = inputPuzzle("Enter the goal puzzle configuration");
+
+//     vector<State> steps; // Vector to store the steps
+
+//     vector<vector<int>> solution = solvePuzzle(initialState, goalState, steps);
+
+//     if (!solution.empty())
+//     {
+//         cout << "\nSolution:" << endl;
+//         for (long long int  i = 0; i < steps.size(); ++i)
+//         {
+//             cout << "Step " << i + 1 << ":" << endl;
+//             printPuzzle(steps[i].puzzle);
+//             cout << endl;
+//         }
+//         cout << "Total steps: " << steps.size() << endl;
+//     }
+//     else
+//     {
+//         cout << "\nNo solution found." << endl;
+//     }
+
+//     return 0;
+// }
+
+
+
+
+
+
+
